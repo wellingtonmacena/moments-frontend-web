@@ -1,2 +1,2 @@
 # moments-frontend-web
-Web interface Moments' application
+Web interface of Moments application
