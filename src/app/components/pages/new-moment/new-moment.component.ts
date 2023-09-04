@@ -12,22 +12,24 @@ import { Moment } from 'src/app/Interfaces/Moment';
 export class NewMomentComponent {
   btnText = 'Compartilhar!';
 
-  constructor(private momentService : MomentService, private messagesService : MessagesService, private router:Router){}
+  constructor(
+    private momentService: MomentService,
+    private messagesService: MessagesService,
+    private router: Router
+  ) {}
 
   async createHandler(moment: Moment) {
     const formData = new FormData();
-    formData.append("title", moment.title);
-    formData.append("description", moment.description);
+    formData.append('title', moment.title);
+    formData.append('description', moment.description);
 
-    if(moment.image){
-      formData.append("image", moment.image);
+    if (moment.image) {
+      formData.append('image', moment.image);
     }
-
-
 
     await this.momentService.createMoment(formData).subscribe();
 
-    this.messagesService.add("Momento adicionado com sucesso!")
-    this.router.navigate(['/'])
+    this.messagesService.add('Momento adicionado com sucesso!');
+    this.router.navigate(['/']);
   }
 }

@@ -14,34 +14,37 @@ export class HomeComponent {
   moments: Moment[] = [];
   baseApiUrl = environment.baseApiUrl;
   faSearch = faSearch;
-  searchTerm:string = '';
+  searchTerm: string = '';
+
 
   constructor(private momentService: MomentService) {
     this.momentService.getMoments().subscribe((items) => {
-
       const data = items.data;
-      data.map(item => {
-        item.created_at = new Date(item.created_at!).toLocaleDateString('pt-BR')
-      })
+      data.map((item) => {
+        item.format_created_at = item.created_at;
+        item.created_at = new Date(item.created_at!).toLocaleDateString(
+          'pt-BR'
+        );
+        console.log(item);
+      });
 
 
-    this.allMoments = data;
-    this.moments = data;
+      this.allMoments = data.sort( (a, b)=> new Date(a.format_created_at!).getTime() - new Date(b.format_created_at!).getTime());
+      this.moments = this.allMoments;
     });
 
   }
 
-  search(event:Event):void{
+  search(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const value = target.value;
 
-      const target  =event.target as HTMLInputElement;
-      const value = target.value;
-
-      if(value== ''){
-        this.moments = this.allMoments;
-      }else{
-
-        this.moments = this.allMoments.filter(item => item.title!= null && item.title.toLowerCase().includes(value));
-      }
-
+    if (value == '') {
+      this.moments = this.allMoments;
+    } else {
+      this.moments = this.allMoments.filter(
+        (item) => item.title != null && item.title.toLowerCase().includes(value)
+      );
+    }
   }
 }

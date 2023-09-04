@@ -1,7 +1,7 @@
 <div class="moment" *ngIf="moment">
   <h1>{{ moment?.title }}</h1>
   <img
-    src="{{ baseApiUrl }}/uploads/{{ moment.image }}"
+    src="{{ moment.image_url }}"
     alt="{{ moment.title }}"
   />
 

@@ -10,7 +10,7 @@ import { Response } from '../Interfaces/Response';
 })
 export class MomentService {
   private baseApiUrl = environment.baseApiUrl;
-  private apiUrl = `${this.baseApiUrl}/api/moments`;
+  private apiUrl = `${this.baseApiUrl}/api/v1/moments`;
 
   constructor(private http: HttpClient) {}
 

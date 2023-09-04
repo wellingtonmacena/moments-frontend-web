@@ -32,8 +32,8 @@ export class EditMomentComponent {
     formData.append('title', momentData.title);
     formData.append('description', momentData.description);
 
-    if (momentData.image) {
-      formData.append('image', momentData.image);
+    if (momentData.image_url) {
+      formData.append('image', momentData.image_url);
     }
 
     await this.momentService.updateMoment(id!, formData).subscribe();
