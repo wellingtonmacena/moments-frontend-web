@@ -60,24 +60,25 @@ export class MomentComponent {
     }
 
     const data: Comment = this.commentForm.value;
-    data.momentId = Number(this.moment!.id);
+    data.moment_id = Number(this.moment!.id);
 
-    await this.commentService.createComment(data).subscribe(comment => this.moment!.comments!.push(comment.data));
-
+    (await this.commentService.createComment(data)).subscribe((comment) => {
+      console.log(comment);
+      this.moment!.comments!.push(comment.data);
+    });
 
     this.messagesService.add('Comentário adicionado!');
     this.commentForm.reset();
 
     formDirective.resetForm();
-
-
   }
 
   async removeHandler(id: number) {
     await this.momentService.removeMoment(id).subscribe();
-    setTimeout(() => {}, 3000);
-    this.messagesService.add('Excluído com sucesso');
+    setTimeout(() => {
+      this.messagesService.add('Excluído com sucesso');
 
-    this.router.navigate(['/']);
+      this.router.navigate(['/']);
+    }, 1000);
   }
 }

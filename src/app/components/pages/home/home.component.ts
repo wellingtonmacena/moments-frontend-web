@@ -25,7 +25,6 @@ export class HomeComponent {
         item.created_at = new Date(item.created_at!).toLocaleDateString(
           'pt-BR'
         );
-        console.log(item);
       });
 
 

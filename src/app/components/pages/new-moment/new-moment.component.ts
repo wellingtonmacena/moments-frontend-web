@@ -27,9 +27,12 @@ export class NewMomentComponent {
       formData.append('image', moment.image);
     }
 
-    await this.momentService.createMoment(formData).subscribe();
+    (await this.momentService.createMoment(formData)).subscribe((item) =>
+      this.messagesService.add('Momento adicionado com sucesso!')
+    );
 
-    this.messagesService.add('Momento adicionado com sucesso!');
-    this.router.navigate(['/']);
+    setTimeout(() => {
+      this.router.navigate(['/']);
+    }, 1000);
   }
 }

@@ -10,14 +10,14 @@ import { Comment } from '../Interfaces/Comment';
 })
 export class CommentService {
   private baseApiUrl = environment.baseApiUrl;
-  private apiUrl = `${this.baseApiUrl}/api/moments`;
+  private apiUrl = `${this.baseApiUrl}/api/v1/moments`;
 
   constructor(private http: HttpClient) {}
 
-  createComment(data: Comment):Observable<Response<Comment>>{
-    const url = `${this.apiUrl}/${data.momentId}/comments`;
+  async createComment(data: Comment):Promise<Observable<Response<Comment>>>{
+    const url = `${this.apiUrl}/${data.moment_id}/comments`;
 
-    return this.http.post<Response<Comment>>(url, data);
+    return await this.http.post<Response<Comment>>(url, data);
   }
 }
 

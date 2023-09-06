@@ -23,8 +23,8 @@ export class MomentService {
     return this.http.get<Response<Moment>>(url);
   }
 
-  createMoment(formData: FormData): Observable<FormData> {
-    return this.http.post<FormData>(this.apiUrl, formData);
+  async createMoment(formData: FormData): Promise<Observable<FormData>> {
+    return  await this.http. post<FormData>(this.apiUrl, formData);
   }
 
   removeMoment(id: number) {
