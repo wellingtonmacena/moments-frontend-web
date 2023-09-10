@@ -33,7 +33,11 @@
     <div *ngIf="moment.comments!.length > 0; else noComments"></div>
     <div class="comment-container" *ngFor="let comment of moment.comments">
       <p class="comment">{{ comment.text }}</p>
-      <p class="author"><span>por:</span>{{ comment.username }}</p>
+      <div class="author-date">
+        <p class="author"><span>por: </span>{{ comment.username }}</p>
+        <p class="date">{{  GetDate(comment.created_at! )  }}</p>
+      </div>
+
     </div>
   </div>
 

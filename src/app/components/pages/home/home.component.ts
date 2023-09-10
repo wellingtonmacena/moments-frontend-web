@@ -1,5 +1,6 @@
 import { MomentService } from './../../../services/moment.service';
 import { Component } from '@angular/core';
+import {  Router } from '@angular/router';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Moment } from 'src/app/Interfaces/Moment';
 import { environment } from 'src/environments/environments';
@@ -16,8 +17,7 @@ export class HomeComponent {
   faSearch = faSearch;
   searchTerm: string = '';
 
-
-  constructor(private momentService: MomentService) {
+  constructor(private momentService: MomentService, private router: Router) {
     this.momentService.getMoments().subscribe((items) => {
       const data = items.data;
       data.map((item) => {
@@ -27,11 +27,18 @@ export class HomeComponent {
         );
       });
 
-
-      this.allMoments = data.sort( (a, b)=> new Date(a.format_created_at!).getTime() - new Date(b.format_created_at!).getTime());
+      this.allMoments = data.sort(
+        (a, b) =>
+          new Date(a.format_created_at!).getTime() -
+          new Date(b.format_created_at!).getTime()
+      );
       this.moments = this.allMoments;
     });
+  }
 
+  redirect(id:Number): void {
+    this.router.navigate([`moments/${ id }`]);
+    console.log('redirect');
   }
 
   search(event: Event): void {

@@ -24,7 +24,7 @@ export class MomentService {
   }
 
   async createMoment(formData: FormData): Promise<Observable<FormData>> {
-    return  await this.http. post<FormData>(this.apiUrl, formData);
+    return await this.http.post<FormData>(this.apiUrl, formData);
   }
 
   removeMoment(id: number) {
@@ -32,8 +32,11 @@ export class MomentService {
     return this.http.delete(url);
   }
 
-  updateMoment(id: number,formData: FormData): Observable<FormData> {
+  async updateMoment(
+    id: number,
+    formData: FormData
+  ): Promise<Observable<FormData>> {
     const url = `${this.apiUrl}/${id}`;
-    return this.http.put<FormData>(url, formData);
+    return await this.http.put<FormData>(url, formData);
   }
 }

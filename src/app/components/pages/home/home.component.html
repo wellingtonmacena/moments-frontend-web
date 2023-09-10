@@ -12,8 +12,10 @@
     <div class="moments-container">
     <div class="moment" *ngFor="let moment of moments">
       <img
+      class="moment-image"
         src="{{ moment.image_url }}"
         alt="{{ moment.title }}"
+        (click)="redirect(moment.id!);"
       />
       <h3>{{ moment.title }}</h3>
       <p class="date">Em:{{ moment.created_at }}</p>

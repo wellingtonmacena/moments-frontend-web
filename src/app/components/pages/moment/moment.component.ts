@@ -46,6 +46,12 @@ export class MomentComponent {
     });
   }
 
+  GetDate(date: string) {
+    return `${new Date(date).toLocaleDateString('pt-BR')} - ${new Date(
+      date
+    ).toTimeString().substring(0,5)}`;
+  }
+
   get text() {
     return this.commentForm.get('text')!;
   }

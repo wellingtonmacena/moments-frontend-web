@@ -46,11 +46,11 @@ img {
 }
 
 .comment {
-  font-size: 0.9em;
+  font-size: 1.1em;
 }
 
 .author {
-  font-size: 0.8em;
+  font-size: 1.0em;
 }
 
 .comment-form {
@@ -66,4 +66,15 @@ img {
 
 .author span {
   font-weight: bold;
+}
+
+.date  {
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+.author-date{
+  display: flex;
+  justify-content: space-between;
+
 }

@@ -21,10 +21,19 @@
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="image">Coloque a foto que mais marcou:</label>
-    <input type="file" (change)="onFileSelected($event)" />
+
+  <div *ngIf="isVisibleToEdit;else noEdit" >
+    <div class="form-group">
+      <label for="image">Coloque a foto que mais marcou:</label>
+      <input type="file" (change)="onFileSelected($event)" />
+    </div>
   </div>
+
+  <ng-template #noEdit >
+    <h4 class="noEdit" >Não é possível trocar foto depois de publicada!</h4>
+  </ng-template>
 
   <input type="submit" value="{{ btnText }}" />
 </form>
+
+

@@ -11,6 +11,7 @@ import { MomentService } from 'src/app/services/moment.service';
 })
 export class EditMomentComponent {
   moment!: Moment;
+
   btnText: string = 'Editar';
 
   constructor(
@@ -29,6 +30,7 @@ export class EditMomentComponent {
     const id = this.moment.id;
     const formData = new FormData();
 
+    formData.append('id', id!.toString());
     formData.append('title', momentData.title);
     formData.append('description', momentData.description);
 
@@ -36,9 +38,9 @@ export class EditMomentComponent {
       formData.append('image', momentData.image_url);
     }
 
-    await this.momentService.updateMoment(id!, formData).subscribe();
-    this.messagesService.add(`Momento${id} foi atualizado com sucesso`);
+    await (await this.momentService.updateMoment(id!, formData)).subscribe(item =>  this.messagesService.add(`Momento ${id} foi atualizado com sucesso`));
 
-    this.router.navigate(['/']);
+setTimeout(()=>{this.router.navigate(['/']);}, 1000)
+
   }
 }

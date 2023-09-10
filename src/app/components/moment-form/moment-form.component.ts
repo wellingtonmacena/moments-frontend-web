@@ -10,6 +10,7 @@ import { Moment } from 'src/app/Interfaces/Moment';
 export class MomentFormComponent {
   @Input() btnText!: string;
   @Input() momentData: Moment | null = null;
+  @Input() isVisibleToEdit:boolean = true;
   @Output() onSubmit = new EventEmitter<Moment>();
   momentForm!: FormGroup;
 
@@ -28,6 +29,8 @@ export class MomentFormComponent {
         description: new FormControl(this.momentData.description, [Validators.required]),
         image: new FormControl(''),
       });
+
+      this.isVisibleToEdit= false;
     }
   }
 
