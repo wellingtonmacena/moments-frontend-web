@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import{HttpClientModule} from '@angular/common/http'
-import{FormsModule, ReactiveFormsModule} from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,8 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MomentComponent } from './components/pages/moment/moment.component';
 import { EditMomentComponent } from './components/pages/edit-moment/edit-moment.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { LoadingInterceptor } from './middleware/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { EditMomentComponent } from './components/pages/edit-moment/edit-moment.
     MomentFormComponent,
     MessagesComponent,
     MomentComponent,
-    EditMomentComponent
+    EditMomentComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,9 +38,15 @@ import { EditMomentComponent } from './components/pages/edit-moment/edit-moment.
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
